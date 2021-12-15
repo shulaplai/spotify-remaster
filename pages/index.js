@@ -17,7 +17,7 @@ export default function Home() {
   if (status === "loading") {
     return <Loader />;
   }
-
+console.log(session)
   return (
     <div className="">
       <Head>
