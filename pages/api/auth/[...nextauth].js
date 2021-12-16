@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
+import GoogleProvider from "next-auth/providers/google";
 
 /**
  * Takes a token, and returns a new token with updated
@@ -54,6 +55,17 @@ export default NextAuth({
       authorization:
         "https://accounts.spotify.com/authorize?response_type=code&scope=user-read-email,playlist-read-private,user-read-email,streaming,user-read-private,user-library-read,user-library-modify,user-read-playback-state,user-modify-playback-state,user-read-recently-played,user-follow-read",
     }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+    }})
   ],
 
   callbacks: {
